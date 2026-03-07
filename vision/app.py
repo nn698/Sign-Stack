@@ -1,32 +1,39 @@
 import cv2
 import mediapipe as mp
+import sys
 
-# 1. Initialize
-mp_hands = mp.solutions.hands
-hands = mp_hands.Hands(min_detection_confidence=0.7)
-mp_draw = mp.solutions.drawing_utils
+# STEP A: Tell Python where your environment's files are (Must be FIRST)
+sys.path.append(r'C:\Users\AKA\Documents\GitHub\Sign-Stack\vision\.venv\Lib\site-packages')
 
-# 2. Start Camera
+# STEP B: The Patch - We manually define 'solutions' BEFORE any other library loads
+from mediapipe.python.solutions import hands as mp_hands
+from mediapipe.python.solutions import drawing_utils as mp_draw
+
+if not hasattr(mp, 'solutions'):
+    class Solutions:
+        pass
+    mp.solutions = Solutions()
+    mp.solutions.hands = mp_hands
+    mp.solutions.drawing_utils = mp_draw
+
+# STEP C: Now, and only now, we load CVZone
+from cvzone.HandTrackingModule import HandDetector
+
+# STEP D: Standard Logic
 cap = cv2.VideoCapture(0)
+detector = HandDetector(detectionCon=0.8, maxHands=2)
 
-while cap.isOpened():
+print("System Patched. Camera starting...")
+
+while True:
     success, img = cap.read()
     if not success:
         break
 
-    # 3. Detect Hands
-    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    results = hands.process(img_rgb)
+    # This will now work because 'mp.solutions.hands' exists in memory
+    hands, img = detector.findHands(img)
 
-    # 4. Draw Dots
-    if results.multi_hand_landmarks:
-        for hand_lms in results.multi_hand_landmarks:
-            mp_draw.draw_landmarks(img, hand_lms, mp_hands.HAND_CONNECTIONS)
-
-    # 5. THE MISSING LINES: Show the window
-    cv2.imshow("SignBridge Vision Engine", img)
-    
-    # Press 'q' to close the window
+    cv2.imshow("Sign-Stack: The Final Fix", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
