@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Stack AI Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SIGN-STACK</h1>
+            <div id="status">Initializing Web App...</div>
+        </header>
+
+        <main>
+            <div class="video-section">
+                <video id="webcam" autoplay playsinline></video>
+                <canvas id="output_canvas"></canvas>
+                <div id="live-caption">Waiting for sign...</div>
+            </div>
+
+            <div class="side-panel">
+                <div class="card">
+                    <h3>Current Letter</h3>
+                    <div id="prediction">?</div>
+                </div>
+                <div class="card">
+                    <h3>Full Sentence</h3>
+                    <p id="sentence-output">...</p>
+                    <button onclick="clearSentence()">Clear Text</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
