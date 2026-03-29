@@ -1,4 +1,5 @@
 ✌️Sign-Stack: Bridging Communication Gaps with Computer Vision & Web Intelligence.
+Model Link:https://nn698.github.io/Sign-Stack/vision/dashboard/index.html
 
 🌟 THE VISION
    Sign-Stack is an accessibility tool designed to translate sign language into real-time text and speech. 
