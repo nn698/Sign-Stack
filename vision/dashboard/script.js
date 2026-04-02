@@ -50,7 +50,6 @@ async function detect(detector) {
 
 // 2. Sign Logic (Basic Finger Counting)
 function analyzeSign(pts) {
-    // Simplified logic: index finger tip (8) vs pip (6)
     const indexUp = pts[8].y < pts[6].y;
     const middleUp = pts[12].y < pts[10].y;
     const ringUp = pts[16].y < pts[14].y;
