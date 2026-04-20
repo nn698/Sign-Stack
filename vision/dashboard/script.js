@@ -8,7 +8,9 @@ const sentenceEl = document.getElementById('sentence-output');
 let lastLetter = "";
 let fullSentence = "";
 let isSpeaking = false;
-
+let detectionCounter = 0;
+const CONFIDEDNCE_LIMIT = 10; // Adjust as needed - higher = more stable, lower = faster
+let candidateSign = null;
 // 1. Voice Function
 function speak(text) {
     if (window.speechSynthesis.speaking) return;
@@ -30,6 +32,24 @@ async function setupAI() {
         canvas.height = video.videoHeight;
         detect(detector);
     };
+    const detected = analyzeSign(points);
+    if(detected !== null&& detected === candidateSign) {
+        detectionCounter++;
+    } else{
+        candidateSign = detected;
+        detectionCounter = 0;
+    }
+
+    if(detectionCounter >= CONFIDEDNCE_LIMIT) {
+        if(lastLetter !== candidateSign) {
+            lastLetter = candidateSign;
+            speak(lastLetter);
+
+            predictionEl.innerText = lastLetter;
+            fullSentence += " " + lastLetter;
+            sentenceEl.innerText = fullSentence;
+        }
+}
 }
 
 async function detect(detector) {
