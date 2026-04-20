@@ -60,6 +60,22 @@ function analyzeSign(pts) {
     if (indexUp && middleUp && !ringUp && !pinkyUp) return "V"; // Victory
     if (indexUp && middleUp && ringUp && pinkyUp && thumbUp) return "HELLO";
     if (!indexUp && !middleUp && !ringUp && !pinkyUp) return "A"; // Fist
+    if(indexUp && !middleUp && !ringUp && pinkyUp && thumbUp) return "I LOVE YOU"; // I LOVE YOU
+    if(indexUp && middleUp && !ringUp && pinkyUp) return "W"; // W
+    if(indexUp && !middleUp && ringUp && pinkyUp) return "F"; // F
+    if(!indexUp && middleUp && ringUp && pinkyUp) return "C"; // C
+    if(!indexUp && middleUp && !ringUp && pinkyUp) return "I"; // I
+    if(!indexUp && middleUp && !ringUp && !pinkyUp) return "M"; // M
+    if(!indexUp && !middleUp && ringUp && pinkyUp) return "R"; // R
+    if(!indexUp && !middleUp && ringUp && !pinkyUp) return "S"; // S
+    if(!indexUp && !middleUp && !ringUp && pinkyUp) return "L"; // L
+    if(indexUp && middleUp && ringUp && pinkyUp && !thumbUp) return "THANK YOU"//THANK YOU
+    if(indexUp && middleUp && ringUp && !pinkyUp && thumbUp) return "YES" // YES
+    if(!indexUp && middleUp && ringUp && !pinkyUp && thumbUp) return "NO" // NO
+    if(indexUp && !middleUp && ringUp && !pinkyUp && thumbUp) return "PLEASE" // PLEASE
+    if(!indexUp && middleUp && !ringUp && pinkyUp && thumbUp) return "GOOD" // GOOD
+    if(indexUp && !middleUp && !ringUp && pinkyUp && !thumbUp) return "BAD" // BAD
+    if(indexUp && middleUp && ringUp && pinkyUp && !thumbUp) return "GOODBYE" // GOODBYE
     return null;
 }
 
