@@ -1,5 +1,17 @@
 import cv2
 import mediapipe as mp
+import os
+import threading 
+from flask import Flask, render_template
+
+app = Flask(__name__,
+            template_folder='vision/dashboard',
+            static_folder='vision/dashboard',
+            static_url_path='')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 # HEALTH CHECK: This will tell us if MediaPipe is actually fixed
 try:
